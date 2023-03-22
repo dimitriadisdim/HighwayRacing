@@ -1,0 +1,9 @@
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/bin/ExportDebug/HighwayRacing.dll
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/bin/ExportDebug/HighwayRacing.pdb
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.csproj.AssemblyReference.cache
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.GeneratedMSBuildEditorConfig.editorconfig
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.AssemblyInfoInputs.cache
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.AssemblyInfo.cs
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.csproj.CoreCompileInputs.cache
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.dll
+/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/ExportDebug/HighwayRacing.pdb

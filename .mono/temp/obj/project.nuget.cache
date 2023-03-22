@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "UVzkWsQ95iNvUKUsL21nZYS2rL8clRVEnNdNZqyl9kTm6jD00wzURNWEU8tzHU6NgZXfDK5lBokO/HQm60Dirg==",
+  "success": true,
+  "projectFilePath": "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj",
+  "expectedPackageFiles": [
+    "/home/dd/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "/home/dd/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.2/microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

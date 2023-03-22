@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj": {}
+  },
+  "projects": {
+    "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj",
+        "projectName": "HighwayRacing",
+        "projectPath": "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj",
+        "packagesPath": "/home/dd/.nuget/packages/",
+        "outputPath": "/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/dd/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.2, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.103/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
