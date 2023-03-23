@@ -3,26 +3,37 @@ using System;
 
 public class ObjectPool : Node
 {
-    [Export] private PackedScene[] _objects;
-    private Vector2 _startingPos;
+    [Export] private PackedScene _rockScene;
+    [Export] private int _rockCount;
+    private Node2D[] _rocks;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Instanciate();
+        Instantiate(); //Create objects
     }
 
-    private void Instanciate(){
-        foreach (var obj in _objects){
+    private void Instantiate(){
+        _rocks = new Node2D[_rockCount];
+        for(int i=0; i<_rockCount; i++){
             //Instanciate object
-            var node = obj.Instance();
+            Node2D node =(Node2D)_rockScene.Instance();
+            //Disable it
+            node.SetProcess(false);
+            //Add to scene
             AddChild(node);
+            //Add to object list
+            _rocks[i] = node;
         }
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public Node2D GetObject(){
+        //Return a diactivated object
+        foreach (var obj in _rocks){
+            if(!obj.IsProcessing())
+                return obj;
+        }
+        return null;
+    }
+
 }
