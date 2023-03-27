@@ -3,10 +3,12 @@ using System;
 
 public class Spawner : Node2D
 {
-	private float _couldown;
 	private ObjectPool _objectPool;
+    private Vector2 _screenSize;
+	private float _couldown;
     private Area2D _player;
 	private Timer _timer;
+    private int[] _pos;
 	
 
 	// Called when the node enters the scene tree for the first time.
@@ -16,8 +18,13 @@ public class Spawner : Node2D
 		_timer = GetNode<Timer>("Timer");
         _player = GetNode<Area2D>("/root/Node/Player");
 		_couldown = 2;
+        _screenSize = GetViewportRect().Size;
+        _pos = new int[] {
+            200, 300, 415, 520
+        };
 		//Start timer
 		_timer.Start(_couldown);
+
 	}
     
     private void Spawn()
@@ -28,9 +35,9 @@ public class Spawner : Node2D
             return;
         //Change location and enable object 
         GD.Randomize(); //Randomize seed
-        var posX = (float)GD.RandRange(180, 545);
-        var posY = _player.Position.y - OS.WindowSize.y;
-        obj.GlobalPosition = new Vector2(posX, posY);
+        var index = (int)GD.RandRange(0, 4);
+        var posY = _player.Position.y - _screenSize.y;
+        obj.GlobalPosition = new Vector2(_pos[index], posY);
         obj.SetProcess(true);
     }
 	

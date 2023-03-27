@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 53.5, 55 )
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Area2D" groups=["Obstacles"]]
 __meta__ = {
 "_edit_group_": true
 }
