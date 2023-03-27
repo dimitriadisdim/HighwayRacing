@@ -420,11 +420,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dd/Godot/HighwayRacing/HighwayRacing.csproj",
+      "projectUniqueName": "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj",
       "projectName": "HighwayRacing",
-      "projectPath": "/home/dd/Godot/HighwayRacing/HighwayRacing.csproj",
+      "projectPath": "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj",
       "packagesPath": "/home/dd/.nuget/packages/",
-      "outputPath": "/home/dd/Godot/HighwayRacing/.mono/temp/obj/",
+      "outputPath": "/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dd/.nuget/NuGet/NuGet.Config"
@@ -458,7 +458,7 @@
             "autoReferenced": true
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.103/RuntimeIdentifierGraph.json"
       }
     }
   }

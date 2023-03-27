@@ -3,10 +3,10 @@ using System;
 
 public class Spawner : Node2D
 {
+    private KinematicBody2D _player;
 	private ObjectPool _objectPool;
     private Vector2 _screenSize;
 	private float _couldown;
-    private Area2D _player;
 	private Timer _timer;
     private int[] _pos;
 	
@@ -16,7 +16,7 @@ public class Spawner : Node2D
 	{
 		_objectPool = GetNode<ObjectPool>("/root/Node/ObjectPool");
 		_timer = GetNode<Timer>("Timer");
-        _player = GetNode<Area2D>("/root/Node/Player");
+        _player = GetNode<KinematicBody2D>("/root/Node/Player");
 		_couldown = 2;
         _screenSize = GetViewportRect().Size;
         _pos = new int[] {

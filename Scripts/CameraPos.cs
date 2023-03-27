@@ -4,13 +4,13 @@ using System;
 public class CameraPos : Camera2D
 {
     private float _posX;
-    private Area2D _player;
+    private KinematicBody2D _player;
 
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _player = GetNode<Area2D>("/root/Node/Player");
+        _player = GetNode<KinematicBody2D>("/root/Node/Player");
         _posX = _player.Position.x + 155;   
     }
 
