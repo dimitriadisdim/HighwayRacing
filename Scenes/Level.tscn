@@ -12,8 +12,8 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 1164 )
-_spd = 500
 _spdVertical = 1500
+_spd = 500
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 155, -520 )
