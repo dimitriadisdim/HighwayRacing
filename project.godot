@@ -14,6 +14,10 @@ config/name="HighwayRacing"
 run/main_scene="res://Scenes/Level.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+UiManager="*res://Scripts/Managers/UiManager.cs"
+
 [display]
 
 window/size/width=720

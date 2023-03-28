@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Obstacles/Rock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Despawn.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Score.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Managers/UiManager.tscn" type="PackedScene" id=9]
 
 [node name="Node" type="Node"]
 
@@ -22,6 +24,8 @@ script = ExtResource( 3 )
 
 [node name="Despawn" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( -210, 373 )
+
+[node name="Score" parent="." instance=ExtResource( 8 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -41,3 +45,5 @@ _rockCount = 10
 
 [node name="Spawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 333, -246 )
+
+[node name="UiManager" parent="." instance=ExtResource( 9 )]
