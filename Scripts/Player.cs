@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 public class Player : KinematicBody2D
 {
+	[Signal]
+	public delegate void EndGame();
+
 	//Movement
 	[Export] private int _spdVertical;
 	[Export] private int _spd;
@@ -40,7 +43,16 @@ public class Player : KinematicBody2D
 		//Add y axis 
 		motion.y = -_spdVertical;
 		//Apply motion
-		MoveAndCollide(motion * GetProcessDeltaTime());
+		MoveAndSlide(motion);
+		//Collision detection
+		OnCollisionEnter2D();
+	}
+
+	private void OnCollisionEnter2D(){
+		for(int i =0; i<GetSlideCount(); i++){
+			EmitSignal("EndGame"); //Emit to GameManager UiManager
+			QueueFree();
+		}
 	} 
 	
 	public override void _Input(InputEvent @event)

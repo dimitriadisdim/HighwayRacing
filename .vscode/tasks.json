@@ -3,13 +3,14 @@
     "tasks": [
         {
             "label": "build",
-            "command": "dotnet",
+            "command": "/home/dd/Godot_v3.5.2-stable_mono_x11_64/Godot_v3.5.2-stable_mono_x11.64",
             "type": "process",
             "args": [
-                "build",
-                "${workspaceFolder}/HighwayRacing.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "--build-solutions",
+                "--path",
+                "${workspaceRoot}",
+                "--no-window",
+                "-q"
             ],
             "problemMatcher": "$msCompile"
         },

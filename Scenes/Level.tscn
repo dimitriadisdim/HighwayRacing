@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/Despawn.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Score.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Managers/UiManager.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Managers/GameManager.tscn" type="PackedScene" id=10]
 
 [node name="Node" type="Node"]
 
@@ -25,6 +26,9 @@ script = ExtResource( 3 )
 [node name="Despawn" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( -210, 373 )
 
+[node name="Position2D" type="Position2D" parent="Player"]
+position = Vector2( 132, -1451 )
+
 [node name="Score" parent="." instance=ExtResource( 8 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -38,12 +42,21 @@ scale = Vector2( 0.849, 2.5 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="ObjectPool" parent="." instance=ExtResource( 4 )]
+[node name="UiManager" parent="." groups=["Persist"] instance=ExtResource( 9 )]
+
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="ObjectPool" parent="Rocks" instance=ExtResource( 4 )]
 position = Vector2( -963, -397 )
-_rockScene = ExtResource( 6 )
-_rockCount = 10
+_scene = ExtResource( 6 )
+_count = 10
 
-[node name="Spawner" parent="." instance=ExtResource( 5 )]
+[node name="RockSpawner" parent="Rocks" instance=ExtResource( 5 )]
 position = Vector2( 333, -246 )
+_objectPoolPath = NodePath("../ObjectPool")
 
-[node name="UiManager" parent="." instance=ExtResource( 9 )]
+[node name="GameManager" parent="." groups=["Persist"] instance=ExtResource( 10 )]
+_objects = [ NodePath("../Rocks/RockSpawner") ]
+
+[connection signal="EndGame" from="Player" to="UiManager" method="EndGame"]
+[connection signal="EndGame" from="Player" to="GameManager" method="EndGame"]
