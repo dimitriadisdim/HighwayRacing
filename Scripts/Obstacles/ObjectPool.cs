@@ -18,10 +18,10 @@ public class ObjectPool : Node
         for(int i=0; i<_count; i++){
             //Instanciate object
             Node2D node =(Node2D)_scene.Instance();
-            //Disable it
-            node.SetProcess(false);
             //Add to scene
             AddChild(node);
+            //Disable it
+            node.SetProcess(false);
             //Add to object list
             _objects[i] = node;
         }

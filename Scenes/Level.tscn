@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -10,13 +10,15 @@
 [ext_resource path="res://Scenes/Score.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Managers/UiManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Managers/GameManager.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Obstacles/Car.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 1164 )
-_spdVertical = 1500
-_spd = 500
+_spdIncrement = 0.2
+_spdVertical = 2000.0
+_maxSpeed = 2000.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 155, -520 )
@@ -44,19 +46,29 @@ centered = false
 
 [node name="UiManager" parent="." groups=["Persist"] instance=ExtResource( 9 )]
 
-[node name="Rocks" type="Node2D" parent="."]
+[node name="GameManager" parent="." groups=["Persist"] instance=ExtResource( 10 )]
+_objects = [ NodePath("../Rocks/Spawner"), NodePath("../Cars/Spawner"), NodePath("../Player") ]
 
-[node name="ObjectPool" parent="Rocks" instance=ExtResource( 4 )]
-position = Vector2( -963, -397 )
-_scene = ExtResource( 6 )
-_count = 10
+[node name="Cars" type="Node2D" parent="."]
+position = Vector2( -778, -534 )
 
-[node name="RockSpawner" parent="Rocks" instance=ExtResource( 5 )]
-position = Vector2( 333, -246 )
+[node name="Spawner" parent="Cars" instance=ExtResource( 5 )]
 _objectPoolPath = NodePath("../ObjectPool")
 
-[node name="GameManager" parent="." groups=["Persist"] instance=ExtResource( 10 )]
-_objects = [ NodePath("../Rocks/RockSpawner") ]
+[node name="ObjectPool" parent="Cars" instance=ExtResource( 4 )]
+_scene = ExtResource( 11 )
+_count = 10
+
+[node name="Rocks" type="Node2D" parent="."]
+position = Vector2( -710, -537 )
+
+[node name="Spawner" parent="Rocks" instance=ExtResource( 5 )]
+position = Vector2( -2, 0 )
+_objectPoolPath = NodePath("../ObjectPool")
+
+[node name="ObjectPool" parent="Rocks" instance=ExtResource( 4 )]
+_scene = ExtResource( 6 )
+_count = 10
 
 [connection signal="EndGame" from="Player" to="UiManager" method="EndGame"]
 [connection signal="EndGame" from="Player" to="GameManager" method="EndGame"]

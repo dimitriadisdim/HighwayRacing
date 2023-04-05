@@ -20,14 +20,14 @@ public class Spawner : Node2D
         _posY = GetNode<Position2D>("/root/Node/Player/Position2D");
 		_timer = GetNode<Timer>("Timer");
         _player = GetNode<KinematicBody2D>("/root/Node/Player");
-		_couldown = 2;
         _screenSize = GetViewportRect().Size;
         _pos = new int[] {
             200, 300, 415, 520
         };
+        //Randomize values
+        _couldown = (float)GD.RandRange(1,5);
 		//Start timer
 		_timer.Start(_couldown);
-
 	}
     
     private void Spawn()
@@ -36,10 +36,15 @@ public class Spawner : Node2D
         var obj = _objectPool.GetObject();
         if(obj == null)
             return;
-        //Change location and enable object 
+        //Change location
         GD.Randomize(); //Randomize seed
-        var index = (int)GD.RandRange(0, 4);
+        var index = (int)GD.RandRange(0, 3);
         obj.GlobalPosition = new Vector2(_pos[index], _posY.GlobalPosition.y);
+        //Run object script
+        var script = obj as ISpanable;
+        if(script != null)
+            script.OnSpawn();
+        //Enable object
         obj.SetProcess(true);
     }
 	

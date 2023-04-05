@@ -8,8 +8,10 @@ public class Player : KinematicBody2D
 	public delegate void EndGame();
 
 	//Movement
-	[Export] private int _spdVertical;
-	[Export] private int _spd;
+	[Export] private float _spdIncrement; 
+	[Export] private float _spdVertical;
+	[Export] private float _maxSpeed;
+	private int _spd;
 	private int _currentLane; // 0-4 Lanes
 	private int[] _lanes;
 	private bool _right;
@@ -23,16 +25,16 @@ public class Player : KinematicBody2D
 		{
 			200, 300, 415, 520
 		};
-		_spdVertical = 1500;
+		_spdVertical = 1000;
 		_currentLane = 0;
+		_spdIncrement = 0.2f;
 		_spd = 500;
 		_right = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
-	{
-			
+	{	
 		//Variables
 		var pos = new Vector2(_lanes[_currentLane], Position.y);
 		var angle = GetAngleTo(pos);
@@ -40,7 +42,9 @@ public class Player : KinematicBody2D
 		//Calculate angle
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
 			motion.x = Mathf.Cos(angle) * _spd;
-		//Add y axis 
+		//Change Speed
+		if(_spdVertical < _maxSpeed)
+			_spdVertical += _spdIncrement;
 		motion.y = -_spdVertical;
 		//Apply motion
 		MoveAndSlide(motion);
@@ -48,7 +52,7 @@ public class Player : KinematicBody2D
 		OnCollisionEnter2D();
 	}
 
-	private void OnCollisionEnter2D(){
+	public void OnCollisionEnter2D(){
 		for(int i =0; i<GetSlideCount(); i++){
 			EmitSignal("EndGame"); //Emit to GameManager UiManager
 			QueueFree();
