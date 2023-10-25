@@ -6,7 +6,6 @@ public class UiManager : Node
     private Label _bestScoreLabel;
 	private Label _scoreLabel;
 	private Timer _couldown;
-	private float _increment;
 	private int _score;
 
 

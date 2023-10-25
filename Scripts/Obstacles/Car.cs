@@ -1,5 +1,4 @@
 using Godot;
-using System.Threading.Tasks;
 
 
 public class Car : KinematicBody2D, ISpanable
@@ -23,20 +22,31 @@ public class Car : KinematicBody2D, ISpanable
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
-		var motion = Vector2.Zero;
-		motion = goingUp ? Vector2.Up : Vector2.Down;
+		Move(delta);
+	}
+
+	private void Move(float delta)
+	{
+		Vector2 motion = goingUp ? Vector2.Up : Vector2.Down;
 		motion *= delta * _speed;
 		//Apply movement
-		Position += motion;
+		var collision = MoveAndCollide(motion);
+		//Collision detection
+		if(collision != null)
+			Destroy();
+	}
+
+	private void Destroy()
+	{
 	}
 
 	private void RandomizeSpeed() => _speed =(int)GD.RandRange(_minSpeed, _maxSpeed);   
 	
-    public void OnSpawn() {
-		RandomizeSpeed(); //Becouse we want diffent speed every time the car respawns
-		GD.Print("Random : " + _speed);
-	}
+	public void OnSpawn() => RandomizeSpeed(); //Becouse we want diffent speed every time the car respawns	
+	
 }
+
+
 
 
 

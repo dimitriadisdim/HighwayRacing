@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Diagnostics;
 
 public class Player : KinematicBody2D
@@ -10,7 +9,7 @@ public class Player : KinematicBody2D
 	//Movement
 	[Export] private float _spdIncrement; 
 	[Export] private float _spdVertical;
-	[Export] private float _maxSpeed;
+	[Export] private readonly float _maxSpeed;
 	private int _spd;
 	private int _currentLane; // 0-4 Lanes
 	private int[] _lanes;
@@ -35,6 +34,13 @@ public class Player : KinematicBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{	
+		Move();
+		//Collision detection
+		OnCollisionEnter2D();
+	}
+
+	private void Move()
+	{
 		//Variables
 		var pos = new Vector2(_lanes[_currentLane], Position.y);
 		var angle = GetAngleTo(pos);
@@ -48,8 +54,6 @@ public class Player : KinematicBody2D
 		motion.y = -_spdVertical;
 		//Apply motion
 		MoveAndSlide(motion);
-		//Collision detection
-		OnCollisionEnter2D();
 	}
 
 	public void OnCollisionEnter2D(){
@@ -83,3 +87,5 @@ public class Player : KinematicBody2D
 		}
 	}
 }
+
+

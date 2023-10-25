@@ -924,7 +924,8 @@
     ]
   },
   "packageFolders": {
-    "/home/dd/.nuget/packages/": {}
+    "/home/dd/.nuget/packages/": {},
+    "/home/dd/.local/share/godot/mono/GodotNuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -935,8 +936,12 @@
       "packagesPath": "/home/dd/.nuget/packages/",
       "outputPath": "/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/home/dd/.local/share/godot/mono/GodotNuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/home/dd/.nuget/NuGet/NuGet.Config"
+        "/home/dd/.nuget/NuGet/NuGet.Config",
+        "/home/dd/.nuget/NuGet/config/Godot.Offline.Config"
       ],
       "originalTargetFrameworks": [
         "net472"
@@ -971,7 +976,7 @@
             "version": "[8.0.0-preview.2.23128.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.103/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.112/RuntimeIdentifierGraph.json"
       }
     }
   }

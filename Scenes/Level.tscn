@@ -17,6 +17,7 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 1164 )
 _spdIncrement = 0.2
+_gasIncement = 1.0
 _spdVertical = 2000.0
 _maxSpeed = 2000.0
 
@@ -72,3 +73,4 @@ _count = 10
 
 [connection signal="EndGame" from="Player" to="UiManager" method="EndGame"]
 [connection signal="EndGame" from="Player" to="GameManager" method="EndGame"]
+[connection signal="Gas" from="Score" to="Player" method="Gas"]

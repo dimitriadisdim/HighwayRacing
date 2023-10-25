@@ -3,7 +3,7 @@ using System;
 
 public class Spawner : Node2D
 {
-	[Export]private NodePath _objectPoolPath;
+	[Export]private readonly NodePath _objectPoolPath;
     private ObjectPool _objectPool;
     private KinematicBody2D _player;
     private Vector2 _screenSize;
@@ -41,8 +41,7 @@ public class Spawner : Node2D
         var index = (int)GD.RandRange(0, 3);
         obj.GlobalPosition = new Vector2(_pos[index], _posY.GlobalPosition.y);
         //Run object script
-        var script = obj as ISpanable;
-        if(script != null)
+        if(obj is ISpanable script)
             script.OnSpawn();
         //Enable object
         obj.SetProcess(true);

@@ -17,9 +17,11 @@ public class CameraPos : Camera2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        var pos = new Vector2();
-        pos.x = _posX;
-        pos.y = _player.Position.y + Position.y;
+        var pos = new Vector2
+        {
+            x = _posX,
+            y = _player.Position.y + Position.y
+        };
         GlobalPosition = pos;
     }
 }
