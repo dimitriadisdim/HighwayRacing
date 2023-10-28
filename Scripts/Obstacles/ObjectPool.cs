@@ -29,10 +29,9 @@ public class ObjectPool : Node
 
     public Node2D GetObject(){
         //Return a diactivated object
-        foreach (var obj in _objects){
+        foreach (var obj in _objects)
             if(!obj.IsProcessing())
-                return obj;
-        }
+                    return obj;
         return null;
     }
 
