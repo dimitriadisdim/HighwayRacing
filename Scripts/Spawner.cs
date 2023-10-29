@@ -22,7 +22,7 @@ public class Spawner : Node2D
         _player = GetNode<KinematicBody2D>("/root/Node/Player");
         _screenSize = GetViewportRect().Size;
         _pos = new int[] {
-            200, 300, 415, 520
+            180, 300, 415, 535
         };
         //Randomize values
         _couldown = (float)GD.RandRange(1,5);

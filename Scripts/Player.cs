@@ -22,12 +22,12 @@ public class Player : KinematicBody2D
 		//Initialize variables
 		_lanes = new int[]
 		{
-			200, 300, 415, 520
+			180, 300, 415, 535
 		};
-		_spdVertical = 1000;
+		_spdVertical = 600;
 		_currentLane = 0;
-		_spdIncrement = 0.2f;
-		_spd = 500;
+		_spdIncrement = .1f;
+		_spd = 700;
 		_right = true;
 	}
 

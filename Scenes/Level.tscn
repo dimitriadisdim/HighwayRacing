@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Sprites/icon.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/roadAlpha.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/CameraPos.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/ObjectPool.tscn" type="PackedScene" id=4]
@@ -16,8 +16,8 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 1164 )
-_spdIncrement = 0.1
-_spdVertical = 2000.0
+_spdIncrement = 0.2
+_spdVertical = 100.0
 _maxSpeed = 2000.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -57,7 +57,7 @@ _objectPoolPath = NodePath("../ObjectPool")
 
 [node name="ObjectPool" parent="Cars" instance=ExtResource( 4 )]
 _scene = ExtResource( 11 )
-_count = 3
+_count = 7
 
 [node name="Rocks" type="Node2D" parent="."]
 position = Vector2( -710, -537 )
@@ -68,7 +68,7 @@ _objectPoolPath = NodePath("../ObjectPool")
 
 [node name="ObjectPool" parent="Rocks" instance=ExtResource( 4 )]
 _scene = ExtResource( 6 )
-_count = 10
+_count = 3
 
 [connection signal="EndGame" from="Player" to="UiManager" method="EndGame"]
 [connection signal="EndGame" from="Player" to="GameManager" method="EndGame"]

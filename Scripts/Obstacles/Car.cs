@@ -1,7 +1,8 @@
+using System.Collections;
 using Godot;
 
 
-public class Car : KinematicBody2D, ISpanable
+public class Car : KinematicBody2D, ISpanable, IDestructible
 {
 	[Export]private int _maxSpeed;
 	[Export]private int _minSpeed;
@@ -41,10 +42,11 @@ public class Car : KinematicBody2D, ISpanable
 		var collision = MoveAndCollide(motion);
 		//Collision detection
 		if(collision != null)
-			Destroy();
+			if(collision.Collider as Car == null)//That means object is not a car 
+				Destroy();
 	}
 
-	private void Destroy()
+	public void Destroy()
 	{
 		_explosion.Emitting = true;
 		_fire.Emitting = true;
