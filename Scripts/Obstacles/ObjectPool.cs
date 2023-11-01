@@ -1,5 +1,5 @@
 using Godot;
-using System;
+
 
 public class ObjectPool : Node
 {
@@ -22,6 +22,8 @@ public class ObjectPool : Node
             AddChild(node);
             //Disable it
             node.SetProcess(false);
+            node.SetPhysicsProcess(false);
+            node.Visible = false;
             //Add to object list
             _objects[i] = node;
         }

@@ -5,7 +5,7 @@ public class GameManager : Node
 {
 	[Export]private NodePath[] _objects;
 
-	private void EndGame()
+    private void EndGame()
 	{
 		//Disable all objects
 		foreach (var objName in _objects){

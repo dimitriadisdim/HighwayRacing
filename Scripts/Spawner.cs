@@ -4,6 +4,8 @@ using System;
 public class Spawner : Node2D
 {
 	[Export]private readonly NodePath _objectPoolPath;
+    [Export]private float min;
+    [Export]private float max;
     private ObjectPool _objectPool;
     private KinematicBody2D _player;
     private Vector2 _screenSize;
@@ -11,7 +13,6 @@ public class Spawner : Node2D
 	private float _couldown;
 	private Timer _timer;
     private int[] _pos;
-	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,7 +26,7 @@ public class Spawner : Node2D
             180, 300, 415, 535
         };
         //Randomize values
-        _couldown = (float)GD.RandRange(1,5);
+        _couldown = (float)GD.RandRange(min, max);
 		//Start timer
 		_timer.Start(_couldown);
 	}
@@ -45,6 +46,8 @@ public class Spawner : Node2D
             script.OnSpawn();
         //Enable object
         obj.SetProcess(true);
+        obj.SetPhysicsProcess(true);
+        obj.Visible = true;
     }
 	
     private void OnTimerTimeout()
