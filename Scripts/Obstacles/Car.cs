@@ -15,7 +15,6 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	private DataManager _data;
 	private Vector2 _motion;
 	private RayCast2D _ray;
-	private bool _shouldRaycast;
 	private int _laneToMove;
 	private float[] _lanes;
 	private bool _right;
@@ -23,7 +22,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_data = GetNode<DataManager>("/root/Node/DataManager");
+		_data = GetNode<DataManager>("/root/Node2D/DataManager");
 		if(_data == null)
 			GD.Print("DataManager is null");
 		else
@@ -43,7 +42,6 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 
 		//Change lane
 		_laneToMove = FindlaneAt();
-		_shouldRaycast = true;
 		_xSpd = 50;
 
 		//We do this becase we are using object pooling
@@ -58,8 +56,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 
     public override void _PhysicsProcess(float delta)
     {
-		if(_shouldRaycast)
-    		RayCasting();
+    	RayCasting();
     }
 
 	private void Move(float delta)
@@ -85,17 +82,14 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 
 		//Set ray destination
 		var viewportRect = GetViewport().GetVisibleRect();
-		_ray.CastTo = new Vector2(0, viewportRect.Size.y/2);
+		_ray.CastTo = new Vector2(0, -viewportRect.Size.y/3);
 
 		//Exclude self 
 		_ray.AddExceptionRid(GetRid()); 
 		
 		//Find collisions
 		if(_ray.IsColliding())
-		{
-			GD.Print("Collidint (" + Name + ")");
 			ChangeLane();
-		}
 	}
 
 	private void ChangeLane()
@@ -105,20 +99,18 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		//We haven't found the lane
 		if(_index == -1)
 			return;
-		//Disable raycast
-		_shouldRaycast = false;
 		//We are in the first lane
 		if(_index == 0){
 			_laneToMove++;
 			_right = true;
 		}
 		//We are in the last lane
-		else if(_index == _lanes.Length-1){
+		else if(_index == 3){
 			_laneToMove--;
 			_right = false;
 		}
 		//We are in one of the middle
-		else{
+		else if(_index > 0 && _index<3){
 			var right = GD.RandRange(0,1);
 			if(right == 0){
 				_laneToMove++;
@@ -129,6 +121,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 				_right = false;
 			}
 		}
+		GD.Print("Changing lane to lane:" + _laneToMove);
 	}
 
 	private int FindlaneAt() => Array.IndexOf(_lanes, GlobalPosition.x);
@@ -142,9 +135,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		var pos = new Vector2(_lanes[_laneToMove], GlobalPosition.y);
 		var angle = GetAngleTo(pos);
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
-			_motion.x = _xSpd;
-		else
-			_shouldRaycast = true; //We are on the right lane start raycasting
+			_motion.x = Mathf.Cos(angle) * _xSpd;
 	}
 #endregion
 

@@ -6,6 +6,7 @@
 extents = Vector2( 48, 43.5 )
 
 [node name="Rock" type="StaticBody2D" groups=["Obstacles"]]
+collision_layer = 4
 __meta__ = {
 "_edit_group_": true
 }

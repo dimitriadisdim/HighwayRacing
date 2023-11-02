@@ -57,9 +57,10 @@ _objects = [ NodePath("../Rocks/Spawner"), NodePath("../Cars/Spawner"), NodePath
 position = Vector2( -1061, -528 )
 
 [node name="Spawner" parent="Cars" instance=ExtResource( 5 )]
+position = Vector2( 2, 0 )
 _objectPoolPath = NodePath("../ObjectPool")
 min = 1.0
-max = 5.0
+max = 3.0
 
 [node name="ObjectPool" parent="Cars" instance=ExtResource( 4 )]
 _scene = ExtResource( 11 )

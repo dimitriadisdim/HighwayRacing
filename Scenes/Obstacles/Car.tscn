@@ -10,7 +10,7 @@ extents = Vector2( 42, 99.5 )
 
 [node name="Car" type="KinematicBody2D"]
 scale = Vector2( 0.75, 0.75 )
-collision_mask = 3
+collision_mask = 7
 script = ExtResource( 2 )
 _maxSpeed = 20
 _minSpeed = 100
@@ -32,4 +32,3 @@ emitting = false
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, -600 )
-collide_with_areas = true
