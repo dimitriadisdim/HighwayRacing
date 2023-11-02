@@ -4,6 +4,7 @@
 [ext_resource path="res://Scenes/Managers/DataManager.tscn" type="PackedScene" id=2]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2( 0, 1 )
 
 [node name="Car3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 535, 1120 )
@@ -15,6 +16,10 @@ _xSpd = 10
 
 [node name="Car5" parent="." instance=ExtResource( 1 )]
 position = Vector2( 415, 842 )
+_xSpd = 10
+
+[node name="Car6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 300, 842 )
 _xSpd = 10
 
 [node name="DataManager" parent="." instance=ExtResource( 2 )]
