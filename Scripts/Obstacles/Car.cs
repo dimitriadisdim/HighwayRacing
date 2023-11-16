@@ -15,6 +15,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	private DataManager _data;
 	private Vector2 _motion;
 	private RayCast2D _ray;
+	private bool _changingLane;
 	private int _laneToMove;
 	private float[] _lanes;
 	private bool _right;
@@ -38,11 +39,12 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		_explosion = GetNode<Particles2D>("Explosion");
 
 		//Raycast
+		_changingLane = false;
 		_ray = GetNode<RayCast2D>("RayCast2D");
 
 		//Change lane
 		_laneToMove = FindlaneAt();
-		_xSpd = 50;
+		_xSpd = 100;
 
 		//We do this becase we are using object pooling
 		_fire.Emitting = false;
@@ -56,7 +58,8 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 
     public override void _PhysicsProcess(float delta)
     {
-    	RayCasting();
+		if(!_changingLane)
+    		RayCasting();
     }
 
 	private void Move(float delta)
@@ -99,6 +102,8 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		//We haven't found the lane
 		if(_index == -1)
 			return;
+		//Disable raycast
+		_changingLane = true;
 		//We are in the first lane
 		if(_index == 0){
 			_laneToMove++;
@@ -136,6 +141,10 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		var angle = GetAngleTo(pos);
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
 			_motion.x = Mathf.Cos(angle) * _xSpd;
+		else{
+			GlobalPosition = new Vector2(_lanes[_laneToMove], GlobalPosition.y);
+			_changingLane = false;
+		}
 	}
 #endregion
 
