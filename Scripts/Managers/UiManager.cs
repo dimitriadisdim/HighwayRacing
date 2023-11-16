@@ -15,7 +15,7 @@ public class UiManager : Node
 		_bestScoreLabel.Hide();
 		_restartButton.Hide();
 		//Retrieve score
-		_scoreNode = GetNode<Score>("./Score");
+		_scoreNode = GetNode<Score>("/root/Node/Score");
 	}
 
     public override void _Process(float delta)
