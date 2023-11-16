@@ -22,7 +22,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_data = GetNode<DataManager>("/root/Node2D/DataManager");
+		_data = GetNode<DataManager>("/root/Node/DataManager");
 		if(_data == null)
 			GD.Print("DataManager is null");
 		else

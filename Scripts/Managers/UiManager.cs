@@ -5,9 +5,7 @@ public class UiManager : Node
     private Button _restartButton;
     private Label _bestScoreLabel;
 	private Label _scoreLabel;
-	private Timer _couldown;
-	private int _score;
-
+	private Score _scoreNode;
 
 	public override void _Ready() { 
         _bestScoreLabel = GetNode<Label>("/root/Node/Score/Control/BestScore");
@@ -16,42 +14,23 @@ public class UiManager : Node
 		//Disable objects
 		_bestScoreLabel.Hide();
 		_restartButton.Hide();
-		//Create and start timer
-		_couldown = new Timer();
-		//Add to tree
-		AddChild(_couldown);
-		_couldown.WaitTime = 1;
-		_couldown.Start();
-		//Run couldown function
-		ScoreTimer();
+		//Retrieve score
+		_scoreNode = GetNode<Score>("./Score");
 	}
 
-	private void ScoreIncrement(){
-		_scoreLabel.Text = "Score: " + _score++;
-	}
+    public override void _Process(float delta)
+    {
+		ShowScore();
+    }
 
-	private async void ScoreTimer(){
-		await ToSignal(_couldown, "timeout");
-		ScoreIncrement();
-		//Restart timer
-		_couldown.WaitTime = 1;
-		_couldown.Start();
-		//Run self
-		ScoreTimer();
+    private void ShowScore(){
+		_scoreLabel.Text = "Score: " + _scoreNode.GetScore();
 	}
     
 	private void EndGame()
 	{
-		_couldown.Stop();
-		//Get high score
-		var bestscore = ConfigManager.GetScore();
-		//Compare scores
-		if(_score > bestscore){
-			bestscore = --_score;
-			ConfigManager.WriteScore(bestscore);
-		}
 		//Assign text and show gui items
-		_bestScoreLabel.Text = "Best Score: " + bestscore;
+		_bestScoreLabel.Text = "Best Score: " + _scoreNode.GetBestScore();
 		_bestScoreLabel.Show();
 		_restartButton.Show();
 	}
