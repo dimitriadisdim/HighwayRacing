@@ -17,7 +17,6 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	private RayCast2D _ray;
 	private bool _changingLane;
 	private int _laneToMove;
-	private float[] _lanes;
 	private bool _right;
 
 	// Called when the node enters the scene tree for the first time.
@@ -26,8 +25,6 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		_data = GetNode<DataManager>("/root/Node/DataManager");
 		if(_data == null)
 			GD.Print("DataManager is null");
-		else
-			_lanes = _data.GetLanes();
 		//Randomize values
 		GD.Randomize();
 		goingUp = true;
@@ -129,7 +126,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		GD.Print("Changing lane to lane:" + _laneToMove);
 	}
 
-	private int FindlaneAt() => Array.IndexOf(_lanes, GlobalPosition.x);
+	private int FindlaneAt() => Array.IndexOf(_data.GetLanes(), GlobalPosition.x);
 	
 	private void MoveToLane()
 	{
@@ -137,12 +134,12 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		if(_laneToMove == -1) return;
 		
 		//Calculate Movement
-		var pos = new Vector2(_lanes[_laneToMove], GlobalPosition.y);
+		var pos = new Vector2(_data.GetLanes()[_laneToMove], GlobalPosition.y);
 		var angle = GetAngleTo(pos);
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
 			_motion.x = Mathf.Cos(angle) * _xSpd;
 		else{
-			GlobalPosition = new Vector2(_lanes[_laneToMove], GlobalPosition.y);
+			GlobalPosition = new Vector2(_data.GetLanes()[_laneToMove], GlobalPosition.y);
 			_changingLane = false;
 		}
 	}

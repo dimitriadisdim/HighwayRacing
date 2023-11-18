@@ -10,20 +10,16 @@ public class Player : KinematicBody2D
 	[Export] private float _spdIncrement; 
 	[Export] private float _spdVertical;
 	[Export] private readonly float _maxSpeed;
+	private DataManager _data;
 	private int _spd;
 	private int _currentLane; // 0-4 Lanes
-	private int[] _lanes;
 	private bool _right;
 	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//Initialize variables
-		_lanes = new int[]
-		{
-			180, 300, 415, 535
-		};
+		_data = GetNode<DataManager>("/root/Node/DataManager");
 		_spdVertical = 600;
 		_currentLane = 0;
 		_spdIncrement = .1f;
@@ -42,7 +38,7 @@ public class Player : KinematicBody2D
 	private void Move()
 	{
 		//Variables
-		var pos = new Vector2(_lanes[_currentLane], Position.y);
+		var pos = new Vector2(_data.GetLanes()[_currentLane], Position.y);
 		var angle = GetAngleTo(pos);
 		var motion = Vector2.Zero; 
 		//Calculate angle

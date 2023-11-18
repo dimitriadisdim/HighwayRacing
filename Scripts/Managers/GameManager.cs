@@ -11,12 +11,12 @@ public class GameManager : Node
     public override void _Ready()
     {
 		_scoreNode = GetNode<Score>("/root/Node/Score");
-		_level = GetNode<Level>("root/Node/Level");
+		//_level = GetNode<Level>("root/Node/Level");
     }
 
     public override void _Process(float delta)
     {
-        if(_scoreNode.GetScore() >= _level.GetBossTriggerScore());
+        //if(_scoreNode.GetScore() >= _level.GetBossTriggerScore());
 			//Trigger boss
     }
 
