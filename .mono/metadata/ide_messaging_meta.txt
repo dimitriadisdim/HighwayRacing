@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-﻿34745
+﻿46231
 /home/dd/Godot_v3.5.2-stable_mono_x11_64/Godot_v3.5.2-stable_mono_x11.64
-=======
-﻿33973
-/home/dd/AppImages/Godot_v3.5.3-stable_mono_x11_64/Godot_v3.5.3-stable_mono_x11.64
->>>>>>> 40743b3de94e495f79bcbf62ac8293e0e6dec2d8
