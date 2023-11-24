@@ -924,8 +924,7 @@
     ]
   },
   "packageFolders": {
-    "/home/dd/.nuget/packages/": {},
-    "/home/dd/.local/share/godot/mono/GodotNuGetFallbackFolder": {}
+    "/home/dd/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -936,12 +935,8 @@
       "packagesPath": "/home/dd/.nuget/packages/",
       "outputPath": "/home/dd/Projects/Godot/HighwayRacing/.mono/temp/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/home/dd/.local/share/godot/mono/GodotNuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/home/dd/.nuget/NuGet/NuGet.Config",
-        "/home/dd/.nuget/NuGet/config/Godot.Offline.Config"
+        "/home/dd/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net472"

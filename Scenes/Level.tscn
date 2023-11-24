@@ -28,7 +28,7 @@ current = true
 script = ExtResource( 3 )
 
 [node name="Despawn" parent="Player" instance=ExtResource( 7 )]
-position = Vector2( -210, 373 )
+position = Vector2( -213, 373 )
 scale = Vector2( 18.2291, 0.996089 )
 
 [node name="Position2D" type="Position2D" parent="Player"]
