@@ -10,7 +10,7 @@ export_presets.cfg
 *.translation
 
 # Mono-specific ignores
-.mono/*
+.mono/
 data_*/
 
 
