@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Sprites/car1_3.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Obstacles/Car.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/Obstacles/CarObstacle.cs" type="Script" id=2]
 [ext_resource path="res://Particles/Fire.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Particles/Explosion.tscn" type="PackedScene" id=4]
 
@@ -12,9 +12,6 @@ extents = Vector2( 42, 99.5 )
 scale = Vector2( 0.75, 0.75 )
 collision_mask = 7
 script = ExtResource( 2 )
-_maxSpeed = 20
-_minSpeed = 100
-goingUp = true
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 1.5708

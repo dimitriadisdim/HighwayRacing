@@ -3,13 +3,9 @@ using System.Linq;
 using Godot;
 
 
-public class Car : KinematicBody2D, ISpanable, IDestructible
+public class CarObstacle : Car, ISpanable, IDestructible
 {
-	[Export]private int _maxSpeed;
-	[Export]private int _minSpeed;
 	[Export]public bool goingUp;
-	[Export]private int _xSpd;
-	[Export]private int _spd;
 	private Particles2D _explosion;
 	private Particles2D _fire;
 	private DataManager _data;
@@ -17,22 +13,17 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	private RayCast2D _ray;
 	private bool _changingLane;
 	private int _laneToMove;
-	private float[] _lanes;
 	private bool _right;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_data = GetNode<DataManager>("/root/Node/DataManager");
-		if(_data == null)
-			GD.Print("DataManager is null");
-		else
-			_lanes = _data.GetLanes();
+		base._Ready();
 		//Randomize values
 		GD.Randomize();
 		goingUp = true;
-		_minSpeed = 200;
-		_maxSpeed = 800;
+		minSpeed = 200;
+		maxSpeed = 800;
 
 		//Particles
 		_fire = GetNode<Particles2D>("Fire");
@@ -44,7 +35,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 
 		//Change lane
 		_laneToMove = FindlaneAt();
-		_xSpd = 100;
+		spdX = 100;
 
 		//We do this becase we are using object pooling
 		_fire.Emitting = false;
@@ -65,7 +56,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 	private void Move(float delta)
 	{
 		_motion = goingUp ? Vector2.Up : Vector2.Down;
-		_motion *= delta * _spd;
+		_motion *= delta * spd;
 		//Add x speed if need it
 		MoveToLane();
 		_motion.x *= delta;
@@ -73,7 +64,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		var collision = MoveAndCollide(_motion);
 		//Collision detection
 		if(collision != null)
-			if(collision.Collider as Car == null)//That means object is not a car 
+			if(collision.Collider as CarObstacle == null)//That means object is not a car 
 				Destroy();
 	}
 
@@ -129,7 +120,7 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		GD.Print("Changing lane to lane:" + _laneToMove);
 	}
 
-	private int FindlaneAt() => Array.IndexOf(_lanes, GlobalPosition.x);
+	private int FindlaneAt() => Array.IndexOf(lanes, GlobalPosition.x);
 	
 	private void MoveToLane()
 	{
@@ -137,18 +128,18 @@ public class Car : KinematicBody2D, ISpanable, IDestructible
 		if(_laneToMove == -1) return;
 		
 		//Calculate Movement
-		var pos = new Vector2(_lanes[_laneToMove], GlobalPosition.y);
+		var pos = new Vector2(lanes[_laneToMove], GlobalPosition.y);
 		var angle = GetAngleTo(pos);
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
-			_motion.x = Mathf.Cos(angle) * _xSpd;
+			_motion.x = Mathf.Cos(angle) * spdX;
 		else{
-			GlobalPosition = new Vector2(_lanes[_laneToMove], GlobalPosition.y);
+			GlobalPosition = new Vector2(lanes[_laneToMove], GlobalPosition.y);
 			_changingLane = false;
 		}
 	}
 #endregion
 
-	private void RandomizeSpeed() => _spd =(int)GD.RandRange(_minSpeed, _maxSpeed);   
+	private void RandomizeSpeed() => spd =(int)GD.RandRange(minSpeed, maxSpeed);   
 
 #region ObjectPool
 	public void Destroy()

@@ -1,33 +1,25 @@
 using Godot;
 using System.Diagnostics;
 
-public class Player : KinematicBody2D
+public class Player : Car
 {
-	[Signal]
-	public delegate void EndGame();
-
+	[Signal] public delegate void EndGame();
 	//Movement
 	[Export] private float _spdIncrement; 
-	[Export] private float _spdVertical;
-	[Export] private readonly float _maxSpeed;
-	private int _spd;
 	private int _currentLane; // 0-4 Lanes
-	private int[] _lanes;
 	private bool _right;
 	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		base._Ready();
 		//Initialize variables
-		_lanes = new int[]
-		{
-			180, 300, 415, 535
-		};
-		_spdVertical = 600;
+		spdX = 600;
 		_currentLane = 0;
 		_spdIncrement = .1f;
-		_spd = 700;
+		spd = 700;
+		maxSpeed = 2000;
 		_right = true;
 	}
 
@@ -42,16 +34,16 @@ public class Player : KinematicBody2D
 	private void Move()
 	{
 		//Variables
-		var pos = new Vector2(_lanes[_currentLane], Position.y);
+		var pos = new Vector2(lanes[_currentLane], Position.y);
 		var angle = GetAngleTo(pos);
 		var motion = Vector2.Zero; 
 		//Calculate angle
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
-			motion.x = Mathf.Cos(angle) * _spd;
+			motion.x = Mathf.Cos(angle) * spdX;
 		//Change Speed
-		if(_spdVertical < _maxSpeed)
-			_spdVertical += _spdIncrement;
-		motion.y = -_spdVertical;
+		if(spd < maxSpeed)
+			spd += _spdIncrement;
+		motion.y = -spd;
 		//Apply motion
 		MoveAndSlide(motion);
 	}

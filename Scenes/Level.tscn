@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Sprites/roadAlpha.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -12,14 +12,15 @@
 [ext_resource path="res://Scenes/Managers/GameManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Obstacles/Car.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Managers/DataManager.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/levels/Level.cs" type="Script" id=13]
 
 [node name="Node" type="Node"]
+script = ExtResource( 13 )
+bossTriggerScore = 100
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 1164 )
 _spdIncrement = 0.2
-_spdVertical = 100.0
-_maxSpeed = 2000.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 155, -520 )
@@ -51,12 +52,12 @@ centered = false
 [node name="GameManager" parent="." groups=["Persist"] instance=ExtResource( 10 )]
 _objects = [ NodePath("../Rocks/Spawner"), NodePath("../Cars/Spawner"), NodePath("../Player") ]
 
-[node name="DataManager" parent="." instance=ExtResource( 12 )]
+[node name="DataManager" parent="." groups=["Persist"] instance=ExtResource( 12 )]
 
 [node name="Cars" type="Node2D" parent="."]
 position = Vector2( -1061, -528 )
 
-[node name="Spawner" parent="Cars" instance=ExtResource( 5 )]
+[node name="Spawner" parent="Cars" groups=["Spawners"] instance=ExtResource( 5 )]
 position = Vector2( 2, 0 )
 _objectPoolPath = NodePath("../ObjectPool")
 min = 1.0
@@ -69,7 +70,7 @@ _count = 10
 [node name="Rocks" type="Node2D" parent="."]
 position = Vector2( -795, -534 )
 
-[node name="Spawner" parent="Rocks" instance=ExtResource( 5 )]
+[node name="Spawner" parent="Rocks" groups=["Spawners"] instance=ExtResource( 5 )]
 position = Vector2( -2, 0 )
 _objectPoolPath = NodePath("../ObjectPool")
 min = 10.0
@@ -81,3 +82,5 @@ _count = 3
 
 [connection signal="EndGame" from="Player" to="UiManager" method="EndGame"]
 [connection signal="EndGame" from="Player" to="GameManager" method="EndGame"]
+[connection signal="BossFight" from="GameManager" to="Cars/Spawner" method="OnGameManagerBossFight"]
+[connection signal="BossFight" from="GameManager" to="Rocks/Spawner" method="OnGameManagerBossFight"]
