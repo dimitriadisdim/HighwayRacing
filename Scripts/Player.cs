@@ -1,12 +1,13 @@
 using Godot;
-using System.Diagnostics;
+
 
 public class Player : Car
 {
 	[Signal] public delegate void EndGame();
-	//Movement
 	[Export] private float _spdIncrement; 
-	private int _currentLane; // 0-4 Lanes
+	private int _currentTurbo;
+	private int _currentLane;
+	private int _maxTurbo;
 	private bool _right;
 	
 
@@ -21,6 +22,8 @@ public class Player : Car
 		spd = 700;
 		maxSpeed = 2000;
 		_right = true;
+		_maxTurbo = 3;
+		_currentTurbo = 0;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -78,6 +81,8 @@ public class Player : Car
 			_currentLane--;
 		}
 	}
+
+	public void AddTurbo() => _currentTurbo = (_currentTurbo < _maxTurbo) ? _currentTurbo + 1 : _currentTurbo;
+	
+	public int GetTurbo() => _currentTurbo;
 }
-
-

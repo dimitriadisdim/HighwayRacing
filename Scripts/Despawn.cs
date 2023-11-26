@@ -24,8 +24,11 @@ public class Despawn : Area2D
         GlobalPosition = new Vector2(_vieportRect.x/2, offset);
     }
 
-    private void OnArea2DAreaEntered(Area2D area) => area.SetProcess(false);
-
+    private void OnArea2DAreaEntered(Area2D area) {
+        area.SetProcess(false);
+        area.SetPhysicsProcess(false);
+        area.Visible = false;
+    }
     private void OnDespawnBodyEntered(PhysicsBody2D body) { 
         body.SetProcess(false);
         body.SetPhysicsProcess(false);

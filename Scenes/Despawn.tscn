@@ -7,8 +7,10 @@
 extents = Vector2( 377, 37.5 )
 
 [node name="Despawn" type="Area2D"]
-position = Vector2( -700, 0 )
+position = Vector2( -700, -3 )
 scale = Vector2( 3, 1 )
+collision_layer = 16
+collision_mask = 15
 priority = 10.0
 script = ExtResource( 1 )
 

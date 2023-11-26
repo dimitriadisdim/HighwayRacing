@@ -5,12 +5,17 @@ public class UiManager : Node
     private Button _restartButton;
     private Label _bestScoreLabel;
 	private Label _scoreLabel;
+	private Label _turboLabel;
 	private Score _scoreNode;
+	private Player _player;
 
-	public override void _Ready() { 
+	public override void _Ready() 
+	{ 
         _bestScoreLabel = GetNode<Label>("/root/Node/Score/Control/BestScore");
 		_scoreLabel = GetNode<Label>("/root/Node/Score/Control/CurrentScore");
         _restartButton = GetNode<Button>("/root/Node/Score/Control/Restart");
+		_turboLabel = GetNode<Label>("/root/Node/Score/TurboUI/TurboLabel");
+		_player = GetNode<Player>("/root/Node/Player");
 		//Disable objects
 		_bestScoreLabel.Hide();
 		_restartButton.Hide();
@@ -21,10 +26,15 @@ public class UiManager : Node
     public override void _Process(float delta)
     {
 		ShowScore();
+		ShowTurbo();
     }
 
     private void ShowScore(){
 		_scoreLabel.Text = "Score: " + _scoreNode.GetScore();
+	}
+
+	private void ShowTurbo(){
+		_turboLabel.Text = "Turbo: " + _player.GetTurbo();
 	}
     
 	private void EndGame()
