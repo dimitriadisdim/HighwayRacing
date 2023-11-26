@@ -45,11 +45,9 @@ public class Score : Node
 	}
 
 	public int GetScore() => _score;
-	
-	private void OnRestartPressed()
-	{
-		GetTree().ReloadCurrentScene();
-	}
+
+	private void OnRestartPressed() => GetTree().ReloadCurrentScene();
 }
+
 
 

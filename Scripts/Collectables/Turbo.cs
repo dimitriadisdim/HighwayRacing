@@ -5,6 +5,7 @@ public class Turbo : Area2D
 {	
 	private void OnTurboBodyEntered(object body)
 	{
+		GD.Print("Hello from mobile");
 		if (body is Player p)
 			p.AddTurbo();
 			

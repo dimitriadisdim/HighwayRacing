@@ -14,7 +14,7 @@ public class UiManager : Node
         _bestScoreLabel = GetNode<Label>("/root/Node/Score/Control/BestScore");
 		_scoreLabel = GetNode<Label>("/root/Node/Score/Control/CurrentScore");
         _restartButton = GetNode<Button>("/root/Node/Score/Control/Restart");
-		_turboLabel = GetNode<Label>("/root/Node/Score/TurboUI/TurboLabel");
+		_turboLabel = GetNode<Label>("/root/Node/Score/Control/TurboLabel");
 		_player = GetNode<Player>("/root/Node/Player");
 		//Disable objects
 		_bestScoreLabel.Hide();

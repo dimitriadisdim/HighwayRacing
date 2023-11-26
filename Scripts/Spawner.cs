@@ -60,7 +60,12 @@ public class Spawner : Node2D
 	}
 
 	private void OnGameManagerBossFight() => _shouldSpawn = false;
+
+	private void OnEndGame() => _shouldSpawn = false;
 }
+
+
+
 
 
 

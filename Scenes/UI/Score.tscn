@@ -51,6 +51,14 @@ margin_right = 90.0
 margin_bottom = 227.0
 icon = ExtResource( 3 )
 
+[node name="TurboLabel" type="Label" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -85.0
+margin_right = 170.0
+custom_fonts/font = ExtResource( 2 )
+text = "Text = 0"
+
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="pressed" from="Control/Restart" to="." method="OnRestartPressed"]
