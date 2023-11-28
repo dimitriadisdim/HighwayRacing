@@ -1,3 +1,4 @@
+using System.Runtime.Remoting.Messaging;
 using Godot;
 
 
@@ -21,4 +22,6 @@ public abstract class Car : KinematicBody2D
 		else
 			lanes = data.GetLanes();
     }   
+
+    public float GetSpd() => spd;
 }

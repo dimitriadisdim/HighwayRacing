@@ -23,3 +23,6 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, -2 )
 shape = SubResource( 1 )
+
+[node name="BoostTimer" type="Timer" parent="."]
+wait_time = 5.0

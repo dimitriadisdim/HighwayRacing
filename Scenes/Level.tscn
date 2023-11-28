@@ -17,7 +17,7 @@
 
 [node name="Node" type="Node"]
 script = ExtResource( 13 )
-bossTriggerScore = 100
+bossTriggerScore = 1000
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 1164 )
@@ -83,6 +83,7 @@ _count = 3
 
 [node name="Turbo" type="Node2D" parent="."]
 position = Vector2( -795, -534 )
+z_index = -1
 
 [node name="ObjectPool" parent="Turbo" instance=ExtResource( 4 )]
 position = Vector2( -266, 7 )

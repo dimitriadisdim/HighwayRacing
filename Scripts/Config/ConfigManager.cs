@@ -24,7 +24,7 @@ public class ConfigManager
         }
     }
 
-    public static int GetScore(){
+    public static Int64 GetScore(){
         if(config == null)
             if(Init() == -1)
                 return 0;
@@ -33,7 +33,7 @@ public class ConfigManager
         return (int)bestScore;
     }
 
-    public static void WriteScore(int score){
+    public static void WriteScore(Int64 score){
         if(config == null)
             if(Init() == -1)
                 return;
