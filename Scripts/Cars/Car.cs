@@ -16,7 +16,7 @@ public abstract class Car : KinematicBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        data = GetNode<DataManager>("/root/Node/DataManager");
+        data = GetNode<DataManager>("/root/DataManager");
 		if(data == null)
 			GD.Print("DataManager is null");
 		else

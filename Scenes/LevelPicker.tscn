@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/roadAlpha.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/Score.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scripts/Managers/LevelPicker.cs" type="Script" id=3]
+
+[node name="Node" type="Node"]
+script = ExtResource( 3 )
+_levels = [ NodePath("Level1"), NodePath("Level2") ]
+
+[node name="Level1" type="Node2D" parent="."]
+scale = Vector2( 0.997973, 0.969036 )
+
+[node name="Sprite1" type="Sprite" parent="Level1"]
+scale = Vector2( 0.849, 2.5 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Level2" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Next" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = -45.5
+margin_bottom = 45.5
+custom_fonts/font = ExtResource( 2 )
+text = "Next"
+
+[node name="Previous" type="Button" parent="CanvasLayer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -45.5
+margin_right = 108.0
+margin_bottom = 45.5
+rect_scale = Vector2( 0.998068, 1.01238 )
+custom_fonts/font = ExtResource( 2 )
+text = "Pre"
+
+[connection signal="pressed" from="CanvasLayer/Next" to="." method="OnNextPressed"]
+[connection signal="pressed" from="CanvasLayer/Previous" to="." method="OnPreviousPressed"]

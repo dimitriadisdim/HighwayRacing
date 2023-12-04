@@ -1,7 +1,7 @@
 using Godot;
 
 
-public class GameManager : Node
+public class LevelManager : Node
 {
 	[Signal]public delegate void BossFight();
 	[Export]private NodePath[] _objects;

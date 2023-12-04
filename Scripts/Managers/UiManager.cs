@@ -21,6 +21,8 @@ public class UiManager : Node
 		_restartButton.Hide();
 		//Retrieve score
 		_scoreNode = GetNode<Score>("/root/Node/Score");
+		//Connect signal
+		_player.Connect("EndGame", this, "EndGame");
 	}
 
     public override void _Process(float delta)
