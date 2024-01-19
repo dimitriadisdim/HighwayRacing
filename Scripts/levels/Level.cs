@@ -3,7 +3,7 @@ using System;
 
 public class Level : Node
 {
-	[Export] int bossTriggerScore;
+	[Export] private int _bossTriggerScore;
 
-	public int GetBossTriggerScore() => bossTriggerScore;
+	public int GetBossTriggerScore() => _bossTriggerScore;
 }

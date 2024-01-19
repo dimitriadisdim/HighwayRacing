@@ -1,8 +1,9 @@
 using Godot;
-using System;
+
 
 public class LevelPicker : Node
 {
+	public static int CurrentLevel;
 	[Export]private NodePath[] _levels;
 	private int _index = 0;
 
@@ -10,7 +11,7 @@ public class LevelPicker : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print(DataManager.GetLevelState(0));
+		GD.Print(ConfigManager.GetLevelState(0));
 	}
 
 	private void OnNextPressed()
@@ -20,6 +21,8 @@ public class LevelPicker : Node
 
 		GetNode<Node2D>(_levels[_index]).Visible = false;
 		GetNode<Node2D>(_levels[++_index]).Visible = true;
+
+		CurrentLevel = _index;
 	}
 	
 	private void OnPreviousPressed()

@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = HighwayRacing
 build_property.ProjectDir = /home/dd/Projects/Godot/HighwayRacing/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "vZ35evIRXzcdl6Fdxc9HmOL9DPr6sFe+GM3Lk7aMuyDMIo+jk8kWwqAaSiP8WrDapi5DbojSZYmbtQPQjYG9cw==",
+  "dgSpecHash": "VMK4/KOuE8OBD0kWfgT6GgFQSUf51EX2LNHDQ7VCK4rb8hWQPRq3+Dsi8KQ8+IFErVekTP8Clwth3EgQhhAO0Q==",
   "success": true,
   "projectFilePath": "/home/dd/Projects/Godot/HighwayRacing/HighwayRacing.csproj",
   "expectedPackageFiles": [
     "/home/dd/.nuget/packages/microsoft.bcl.asyncinterfaces/8.0.0-preview.2.23128.3/microsoft.bcl.asyncinterfaces.8.0.0-preview.2.23128.3.nupkg.sha512",
-    "/home/dd/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
-    "/home/dd/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.2/microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512",
+    "/home/dd/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.3/microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "/home/dd/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.3/microsoft.netframework.referenceassemblies.net472.1.0.3.nupkg.sha512",
     "/home/dd/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/home/dd/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
     "/home/dd/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",

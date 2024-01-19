@@ -20,7 +20,7 @@ public abstract class Car : KinematicBody2D
 		if(data == null)
 			GD.Print("DataManager is null");
 		else
-			lanes = data.GetLanes();
+			lanes = DataManager.Lanes;
     }   
 
     public float GetSpd() => spd;

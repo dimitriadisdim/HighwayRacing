@@ -3,18 +3,18 @@ using Godot;
 
 public class ConfigManager
 {
-    private static ConfigFile config;
-    private static readonly string filePath = "user://score.cfg";
-
+    private static ConfigFile _config;
+    private static readonly string _configPath = "user://data.cfg";
     
     private static int Init(){
         try{
-            config = new ConfigFile();
-            var err = config.Load(filePath);
+            _config = new ConfigFile();
+            var err = _config.LoadEncryptedPass(_configPath, DataManager.Password);
             //Check if file could load
             if(err != Error.Ok){
                 GD.PrintErr("Failed to load config file, creating...");
-                config.Save(filePath);
+                CreateDefault(_config);
+                _config.SaveEncryptedPass(_configPath, DataManager.Password);
             }
             //All went smoothly
             return 0;
@@ -24,21 +24,57 @@ public class ConfigManager
         }
     }
 
+    private static void CreateDefault(ConfigFile _config)
+    {
+        //Set all levels except the first one to locked
+        for(int i=0; i<DataManager.LevelCount; i++){
+            if(i == 0){
+                _config.SetValue("Levels", i.ToString(), DataManager.LevelState.Unlocked);
+                continue;
+            }
+            _config.SetValue("Levels", i.ToString(), DataManager.LevelState.Locked);
+        }
+        _config.SaveEncryptedPass(_configPath, DataManager.Password);
+    }
+
+#region Score
     public static Int64 GetScore(){
-        if(config == null)
+        if(_config == null)
             if(Init() == -1)
-                return 0;
+                return -1;
         //Config exists or created successfully
-        var bestScore = config.GetValue("Score", "Best", 0);
+        var bestScore = _config.GetValue("Score", LevelPicker.CurrentLevel.ToString(), 0);
         return (int)bestScore;
     }
 
     public static void WriteScore(Int64 score){
-        if(config == null)
+        if(_config == null)
             if(Init() == -1)
                 return;
         //Config exists or created successfully
-        config.SetValue("Score", "Best", score);
-        config.Save(filePath);
+        _config.SetValue("Score", LevelPicker.CurrentLevel.ToString(), score);
+        _config.Save(_configPath);
     }
+#endregion
+#region Levels
+
+    public static void SetLevelState(DataManager.LevelState state, int level)
+    {
+        if(_config == null)
+            if(Init() == -1)
+                return;
+
+        _config.SetValue("Levels", level.ToString(), state);
+    }
+
+    public static DataManager.LevelState GetLevelState(int level)
+    {
+        if(_config == null)
+            if(Init() == -1)
+                return DataManager.LevelState.Error;
+        
+        var s = _config.GetValue("Levels", level.ToString(), DataManager.LevelState.Locked);
+        return (DataManager.LevelState)s;
+    }
+#endregion
 }
