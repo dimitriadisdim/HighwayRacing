@@ -1,16 +1,16 @@
 using Godot;
 using System;
 
-public class Spawner : Node2D
+public partial class Spawner : Node2D
 {
-	[Export]private readonly NodePath _objectPoolPath;
+	[Export]private NodePath _objectPoolPath;
 	[Export]private float min;
 	[Export]private float max;
 	private ObjectPool _objectPool;
-	private KinematicBody2D _player;
+	private CharacterBody2D _player;
 	private Vector2 _screenSize;
 	private bool _shouldSpawn;
-	private Position2D _posY;
+	private Marker2D _posY;
 	private float _couldown;
 	private Timer _timer;
 	private int[] _pos;
@@ -19,9 +19,9 @@ public class Spawner : Node2D
 	public override void _Ready()
 	{
 		_objectPool = GetNode<ObjectPool>(_objectPoolPath);
-		_posY = GetNode<Position2D>("/root/Node/Player/Position2D");
+		_posY = GetNode<Marker2D>("/root/Node/Player/Marker2D");
 		_timer = GetNode<Timer>("Timer");
-		_player = GetNode<KinematicBody2D>("/root/Node/Player");
+		_player = GetNode<CharacterBody2D>("/root/Node/Player");
 		_screenSize = GetViewportRect().Size;
 		_pos = new int[] {
 			180, 300, 415, 535
@@ -42,7 +42,7 @@ public class Spawner : Node2D
 		//Change location
 		GD.Randomize(); //Randomize seed
 		var index = (int)GD.RandRange(0, 4);
-		obj.GlobalPosition = new Vector2(_pos[index], _posY.GlobalPosition.y);
+		obj.GlobalPosition = new Vector2(_pos[index], _posY.GlobalPosition.Y);
 		//Run object script
 		if(obj is ISpanable script)
 			script.OnSpawn();

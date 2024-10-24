@@ -1,9 +1,9 @@
 using Godot;
 
 
-public class LevelManager : Node
+public partial class LevelManager : Node
 {
-	[Signal]public delegate void BossFight();
+	[Signal]public delegate void BossFightEventHandler();
 	[Export]private NodePath[] _objects;
 	private bool _bossFightTriggered;
 	private Score _scoreNode;
@@ -17,7 +17,7 @@ public class LevelManager : Node
 		_bossFightTriggered = false;
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if(_scoreNode.GetScore() >= _level.GetBossTriggerScore() && !_bossFightTriggered){
 			GD.Print("Boss triggered");

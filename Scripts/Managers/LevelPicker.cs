@@ -1,7 +1,7 @@
 using Godot;
 
 
-public class LevelPicker : Node
+public partial class LevelPicker : Node
 {
 	public static int CurrentLevel;
 	[Export]private NodePath[] _levels;

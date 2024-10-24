@@ -1,13 +1,12 @@
 using System;
-using System.Linq;
 using Godot;
 
 
-public class CarObstacle : Car, ISpanable, IDestructible
+public partial class CarObstacle : Car, ISpanable, IDestructible
 {
 	[Export]public bool goingUp;
-	private Particles2D _explosion;
-	private Particles2D _fire;
+	private GpuParticles2D _explosion;
+	private GpuParticles2D _fire;
 	private DataManager _data;
 	private Vector2 _motion;
 	private RayCast2D _ray;
@@ -26,8 +25,8 @@ public class CarObstacle : Car, ISpanable, IDestructible
 		maxSpeed = 800;
 
 		//Particles
-		_fire = GetNode<Particles2D>("Fire");
-		_explosion = GetNode<Particles2D>("Explosion");
+		_fire = GetNode<GpuParticles2D>("Fire");
+		_explosion = GetNode<GpuParticles2D>("Explosion");
 
 		//Raycast
 		_changingLane = false;
@@ -42,29 +41,29 @@ public class CarObstacle : Car, ISpanable, IDestructible
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(float delta)
+	public override void _Process(double delta)
 	{
 		Move(delta);
 	}
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
 		if(!_changingLane)
     		RayCasting();
     }
 
-	private void Move(float delta)
+	private void Move(double delta)
 	{
 		_motion = goingUp ? Vector2.Up : Vector2.Down;
-		_motion *= delta * spd;
+		_motion *= (float)(delta * spd);
 		//Add x speed if need it
 		MoveToLane();
-		_motion.x *= delta;
+		_motion.X *= (float)delta;
 		//Apply movement
 		var collision = MoveAndCollide(_motion);
 		//Collision detection
 		if(collision != null)
-			if(collision.Collider as CarObstacle == null)//That means object is not a car 
+			if(collision.GetCollider() is not CarObstacle) //That means object is not a car 
 				Destroy();
 	}
 
@@ -76,7 +75,7 @@ public class CarObstacle : Car, ISpanable, IDestructible
 
 		//Set ray destination
 		var viewportRect = GetViewport().GetVisibleRect();
-		_ray.CastTo = new Vector2(0, -viewportRect.Size.y/3);
+		_ray.TargetPosition = new Vector2(0, -viewportRect.Size.Y/3);
 
 		//Exclude self 
 		_ray.AddExceptionRid(GetRid()); 
@@ -120,7 +119,7 @@ public class CarObstacle : Car, ISpanable, IDestructible
 		GD.Print("Changing lane to lane:" + _laneToMove);
 	}
 
-	private int FindlaneAt() => Array.IndexOf(lanes, GlobalPosition.x);
+	private int FindlaneAt() => Array.IndexOf(lanes, GlobalPosition.X);
 	
 	private void MoveToLane()
 	{
@@ -128,12 +127,12 @@ public class CarObstacle : Car, ISpanable, IDestructible
 		if(_laneToMove == -1) return;
 		
 		//Calculate Movement
-		var pos = new Vector2(lanes[_laneToMove], GlobalPosition.y);
+		var pos = new Vector2(lanes[_laneToMove], GlobalPosition.Y);
 		var angle = GetAngleTo(pos);
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
-			_motion.x = Mathf.Cos(angle) * spdX;
+			_motion.X = Mathf.Cos(angle) * spdX;
 		else{
-			GlobalPosition = new Vector2(lanes[_laneToMove], GlobalPosition.y);
+			GlobalPosition = new Vector2(lanes[_laneToMove], GlobalPosition.Y);
 			_changingLane = false;
 		}
 	}

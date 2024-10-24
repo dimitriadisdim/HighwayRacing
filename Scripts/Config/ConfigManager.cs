@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public class ConfigManager
+public partial class ConfigManager
 {
     private static ConfigFile _config;
     private static readonly string _configPath = "user://data.cfg";
@@ -29,10 +29,10 @@ public class ConfigManager
         //Set all levels except the first one to locked
         for(int i=0; i<DataManager.LevelCount; i++){
             if(i == 0){
-                _config.SetValue("Levels", i.ToString(), DataManager.LevelState.Unlocked);
+                _config.SetValue("Levels", i.ToString(), (int)DataManager.LevelState.Unlocked);
                 continue;
             }
-            _config.SetValue("Levels", i.ToString(), DataManager.LevelState.Locked);
+            _config.SetValue("Levels", i.ToString(), (int)DataManager.LevelState.Locked);
         }
         _config.SaveEncryptedPass(_configPath, DataManager.Password);
     }
@@ -64,7 +64,7 @@ public class ConfigManager
             if(Init() == -1)
                 return;
 
-        _config.SetValue("Levels", level.ToString(), state);
+        _config.SetValue("Levels", level.ToString(), (int)state);
     }
 
     public static DataManager.LevelState GetLevelState(int level)
@@ -73,8 +73,8 @@ public class ConfigManager
             if(Init() == -1)
                 return DataManager.LevelState.Error;
         
-        var s = _config.GetValue("Levels", level.ToString(), DataManager.LevelState.Locked);
-        return (DataManager.LevelState)s;
+        var s = _config.GetValue("Levels", level.ToString(), (int)DataManager.LevelState.Locked);
+        return (DataManager.LevelState)(int)s;
     }
 #endregion
 }

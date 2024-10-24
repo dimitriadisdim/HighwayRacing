@@ -6,12 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="HighwayRacing"
 run/main_scene="res://Scenes/Level.tscn"
+config/features=PackedStringArray("4.3", "C#")
 config/icon="res://icon.png"
 
 [autoload]
@@ -20,11 +21,15 @@ DataManager="*res://Scenes/Managers/DataManager.tscn"
 
 [display]
 
-window/size/width=720
-window/size/height=1280
-window/handheld/orientation="portrait"
+window/size/viewport_width=720
+window/size/viewport_height=1280
 window/stretch/mode="2d"
 window/stretch/aspect="keep_height"
+window/handheld/orientation="portrait"
+
+[dotnet]
+
+project/assembly_name="HighwayRacing"
 
 [global]
 
@@ -38,7 +43,7 @@ common/drop_mouse_on_gui_input_disabled=true
 
 Touch={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 
 [input_devices]
@@ -66,4 +71,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"

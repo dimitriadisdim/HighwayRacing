@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public abstract class Boss : Node2D
+public abstract partial class Boss : Node2D
 {
-    [Signal]public delegate void Defeated();
+    [Signal]public delegate void DefeatedEventHandler();
 
 
     public override void _Ready()

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Level : Node
+public partial class Level : Node
 {
 	[Export] private int _bossTriggerScore;
 

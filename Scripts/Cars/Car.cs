@@ -1,8 +1,7 @@
-using System.Runtime.Remoting.Messaging;
 using Godot;
 
 
-public abstract class Car : KinematicBody2D
+public abstract partial class Car : CharacterBody2D
 {
     [Export]protected float maxSpeed;
     [Export]protected int turboCount; //Maybe will move out of car

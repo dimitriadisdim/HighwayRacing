@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Destroy : Area2D
+public partial class Destroy : Area2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

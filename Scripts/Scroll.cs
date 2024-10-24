@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Scroll : ParallaxBackground
+public partial class Scroll : ParallaxBackground
 {
     [Export]private int _scrollSpd; 
 
@@ -12,9 +12,9 @@ public class Scroll : ParallaxBackground
     }
 
  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         var direction = new Vector2(0, 1);
-        ScrollOffset += direction * _scrollSpd * delta;
+        ScrollOffset += direction * (float)(_scrollSpd * delta);
     }
 }

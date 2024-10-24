@@ -1,7 +1,7 @@
 using Godot;
 
 
-public class ObjectPool : Node
+public partial class ObjectPool : Node
 {
     [Export] private PackedScene _scene;
     [Export] private int _count;
@@ -17,7 +17,7 @@ public class ObjectPool : Node
         _objects = new Node2D[_count];
         for(int i=0; i<_count; i++){
             //Instanciate object
-            Node2D node =(Node2D)_scene.Instance();
+            Node2D node =(Node2D)_scene.Instantiate();
             //Add to scene
             AddChild(node);
             //Disable it

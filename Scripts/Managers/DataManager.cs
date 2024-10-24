@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 
-public class DataManager: Node
+public partial class DataManager: Node
 {
     public static readonly float[] Lanes = { 180, 300, 415, 535};
     public static readonly int LevelCount = 2;

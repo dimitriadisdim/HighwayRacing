@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Godot;
 
 
-public class Despawn : Area2D
+public partial class Despawn : Area2D
 {
     private Vector2 _startingPos;
     private Vector2 _vieportRect;
@@ -18,10 +18,10 @@ public class Despawn : Area2D
         _vieportRect = vieport.Size;
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
-        float offset = _player.Position.y + _vieportRect.y;
-        GlobalPosition = new Vector2(_vieportRect.x/2, offset);
+        float offset = _player.Position.Y + _vieportRect.Y;
+        GlobalPosition = new Vector2(_vieportRect.X/2, offset);
     }
 
     private void OnArea2DAreaEntered(Area2D area) {
@@ -29,6 +29,7 @@ public class Despawn : Area2D
         area.SetPhysicsProcess(false);
         area.Visible = false;
     }
+
     private void OnDespawnBodyEntered(PhysicsBody2D body) { 
         body.SetProcess(false);
         body.SetPhysicsProcess(false);

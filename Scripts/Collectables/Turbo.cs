@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Turbo : Area2D
+public partial class Turbo : Area2D
 {	
 	private void OnTurboBodyEntered(object body)
 	{
@@ -16,5 +16,3 @@ public class Turbo : Area2D
 	}
 	
 }
-
-

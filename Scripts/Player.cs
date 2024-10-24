@@ -2,16 +2,16 @@ using System;
 using Godot;
 
 
-public class Player : Car
+public partial class Player : Car
 {
-	[Signal] public delegate void EndGame();
+	[Signal] public delegate void EndGameEventHandler();
 	[Export] private float _boostDuration;
 	[Export] private float _spdIncrement; 
 	[Export]private float _boostMultiplier;
 	private const float TapTimeout = 0.2f;
 	private Vector2 _swipeStart;
 	private float _minimumDrag;
-	private float _lastKeyDelta;
+	private double _lastKeyDelta;
 	private float _boostSpd;
 	private int _currentBoost;
 	private int _currentLane;
@@ -43,7 +43,7 @@ public class Player : Car
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(float delta)
+	public override void _Process(double delta)
 	{	
 		Move();
 		//Collision detection
@@ -54,43 +54,42 @@ public class Player : Car
 	private void Move()
 	{
 		//Variables
-		var pos = new Vector2(lanes[_currentLane], Position.y);
+		var pos = new Vector2(lanes[_currentLane], Position.Y);
 		var angle = GetAngleTo(pos);
 		var motion = Vector2.Zero; 
 		//Calculate angle
 		if((_right && angle == 0) || (!_right && angle == Mathf.Pi))
-			motion.x = Mathf.Cos(angle) * spdX;
+			motion.X = Mathf.Cos(angle) * spdX;
 		//Change Speed
 		if(spd < maxSpeed)
 			spd += _spdIncrement;	
 		//Apply boost
-		motion.y = _boosting ? -_boostSpd : -spd;
+		motion.Y = _boosting ? -_boostSpd : -spd;
+		//Change velocity to apply movement
+		Velocity = motion;
 		//Apply motion
-		MoveAndSlide(motion);
+		MoveAndSlide();
 	}
 
 	public void OnCollisionEnter2D(){
-		for(int i =0; i<GetSlideCount(); i++){
+		for(int i =0; i<GetSlideCollisionCount(); i++){
 			EmitSignal("EndGame"); //Emit to GameManager UiManager
 			QueueFree();
 		}
 	} 
 	
 	private void CalculateSwipe(Vector2 swipeEnd)
-	{
-		if(swipeEnd == null)
-			return;
-		
+	{	
 		var swipe = swipeEnd - _swipeStart;
-		GD.Print(swipeEnd.x + "-" + _swipeStart.x);
+		GD.Print(swipeEnd.X + "-" + _swipeStart.X);
 		//Add a drag so we dont consider the minimal movement
-		if(Mathf.Abs(swipe.x) > _minimumDrag)
+		if(Mathf.Abs(swipe.X) > _minimumDrag)
 			// //Change lane
-			if (swipe.x > 0 && _currentLane != 3){
+			if (swipe.X > 0 && _currentLane != 3){
 				_right = true;
 				_currentLane++;
 			}
-			if (swipe.x < 0 && _currentLane != 0){
+			if (swipe.X < 0 && _currentLane != 0){
 				_right = false;
 				_currentLane--;
 			}

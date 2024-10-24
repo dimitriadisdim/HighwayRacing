@@ -1,8 +1,7 @@
 using Godot;
 using System;
-using System.Runtime.Remoting.Messaging;
 
-public class Score : Node
+public partial class Score : Node
 {
 	private int _scoreIncreament;
 	private Timer _couldownTimer;

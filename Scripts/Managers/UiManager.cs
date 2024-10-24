@@ -1,6 +1,6 @@
 using Godot;
 
-public class UiManager : Node
+public partial class UiManager : Node
 {
     private Button _restartButton;
     private Label _bestScoreLabel;
@@ -22,10 +22,10 @@ public class UiManager : Node
 		//Retrieve score
 		_scoreNode = GetNode<Score>("/root/Node/Score");
 		//Connect signal
-		_player.Connect("EndGame", this, "EndGame");
+		_player.Connect("EndGame", new Callable(this, "EndGame"));
 	}
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
 		ShowScore();
 		ShowTurbo();
